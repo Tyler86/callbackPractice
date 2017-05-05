@@ -1,14 +1,14 @@
 /* In this repo your job is to write functions to make each function call work properly.
-Below is a sample problem 
+Below is a sample problem
 
   //code here for sayHi
 
    sayHi('Hi Katie', function(thingToSay){
       alert(thingToSay);
    });
-   
-and what you should write is the sayHi function that makes the code above work, 
-    
+
+and what you should write is the sayHi function that makes the code above work,
+
    var sayHi = function(str, cb){
     cb(str);
    }
@@ -16,15 +16,16 @@ and what you should write is the sayHi function that makes the code above work,
    sayHi('Hi Katie', function(thingToSay){
       alert(thingToSay); //should alert ('Hi Katie')'
    });
-    
+
 */
-
-
 // 1. Write a function called first that returns the first item of the array using a callback function
 
   // Code Here
+function first(items,callback){
+firstItem =items[0];
+      callback(firstItem);
+}
 
-  
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 first(names, function(firstName){
   console.log('The first name in names is ' + firstName)
@@ -35,6 +36,12 @@ first(names, function(firstName){
 // 2. Write a function called last which returns the last item of the array using a callback function.
 
   //Code Here
+function last(arr,callback){
+var lastItem = arr[arr.length-1];
+
+  callback(lastItem);
+}
+
 
 last(names, function(lastName){
   console.log('The last name in names is ' + lastName);
@@ -45,7 +52,10 @@ last(names, function(lastName){
 // 3. Write a function called multiply that multiplies two numbers using a callback function.
 
   //Code Here
-
+function multiply(a,b,callback){
+ a=a*b;
+   callback(a);
+}
 
 multiply(4, 3, function(answer){
   console.log('The answer is ' + answer); //should console.log 12
@@ -53,12 +63,21 @@ multiply(4, 3, function(answer){
 
 
 
-// 4. Write a function called contains that checks if a name exists in an array. 
+// 4. Write a function called contains that checks if a name exists in an array.
 // If it does, return true using the callback, if not return false.
 
-  //Code Here 
+  //Code Here
+function contains(arr,name,callback){
+    arr.map(function(val){
+      if((val==name)==true);
+      callback(true);
+    });
+    if(name!= true)
+  callback(false);
+}
 
-contains(names, 'Colt', function(result){
+
+ contains(names, 'Colt', function(result){
   if(result === true){
     console.log('Colt is in the array');
   } else {
@@ -68,20 +87,41 @@ contains(names, 'Colt', function(result){
 
 
 
-// 5. Write a function called uniq that takes the names array and removes all duplicates and returns 
+// 5. Write a function called uniq that takes the names array and removes all duplicates and returns
 // the callback function with the array of unique names.
 
     //Code Here
+
+function uniq(arr,callback)
+{
+var newArr=[];
+  for(var i = 0; i< arr.length; i++)
+  {
+    if(newArr.indexOf(arr[i])<0)
+      {
+        newArr.push(arr[i]);
+      }
+    }
+ callback(newArr);
+
+}
 
 uniq(names, function(uniqArr){
   console.log('The new names array with all the duplicate items removed is ', uniqArr);
 });
 
 
-// 6. Write a function called each that takes in an array of names. For each item, use a callback 
+// 6. Write a function called each that takes in an array of names. For each item, use a callback
 // function to return the indices and item.
 
-    //Code Here 
+    //Code Here
+function each(arr,callback)
+{
+  for(var i=0; i< arr.length; i++ )
+  {
+    callback(arr[i],i);
+  }
+}
 
 each(names, function(item, indice){
   console.log('The item in the ' + indice + ' position is ' + item)
@@ -89,11 +129,18 @@ each(names, function(item, indice){
 
 
 
-// 7. Write a function called getUserById that looks at the array of user objects (users) and searches for a user by ID 
+// 7. Write a function called getUserById that looks at the array of user objects (users) and searches for a user by ID
 // and returns that user.
 
  //Code Here
+ function getUserById(arr, id,callback){
+ for (var i = 0; i < arr.length; i++) {
+   if(arr[i].id==id){
 
+      callback(arr[i]);
+      }
+    }
+}
 var users = [
   {
     id: '12d',
@@ -116,5 +163,5 @@ var users = [
 ];
 
 getUserById(users, '16t', function(user){
-  console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address); 
+  console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address);
 });
